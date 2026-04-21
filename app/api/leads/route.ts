@@ -40,7 +40,13 @@ export async function POST(request: Request) {
 
     // 2. Connect to DB and insert the validated data
     await connectDB();
-    const newLead = await Lead.create(validationResult.data);
+    const newLead = await await Lead.create({
+      ...validationResult.data,
+      history: [{
+        action: "Lead Created",
+        details: `Lead captured via ${validationResult.data.source}`,
+      }]
+    });
 
     return NextResponse.json(
       { success: true, data: newLead },
