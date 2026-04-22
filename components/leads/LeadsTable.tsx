@@ -82,9 +82,10 @@ export default function LeadsTable({ initialLeads }: { initialLeads: Lead[] }) {
         </div>
       </div>
 
-      {/* Modern Table */}
+      {/* Modern Table — horizontally scrollable on mobile */}
       <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-        <table className="w-full text-left border-collapse">
+        <div className="overflow-x-auto">
+          <table className="w-full min-w-[640px] text-left border-collapse">
           <thead>
             <tr className="bg-slate-50/50 border-b border-slate-100">
               <th className="px-6 py-4 text-[11px] font-bold text-slate-500 uppercase tracking-widest">Lead Information</th>
@@ -131,7 +132,8 @@ export default function LeadsTable({ initialLeads }: { initialLeads: Lead[] }) {
               </tr>
             ))}
           </tbody>
-        </table>
+          </table>
+        </div>
       </div>
     </div>
   );

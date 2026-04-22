@@ -72,10 +72,10 @@ export default function LeadDetail({ initialLead }: { initialLead: Lead }) {
   };
 
   return (
-    <div className="max-w-6xl mx-auto space-y-6 pb-20">
+    <div className="max-w-6xl mx-auto space-y-6 pb-20 min-w-0">
       
       {/* Header Card with Edit Toggle */}
-      <div className="glass-card p-6 rounded-3xl flex flex-col md:flex-row justify-between items-center gap-6">
+      <div className="glass-card p-5 sm:p-6 rounded-3xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div className="flex items-center gap-4">
           <div className="w-14 h-14 bg-indigo-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-indigo-200">
             <User size={28} />
@@ -94,7 +94,7 @@ export default function LeadDetail({ initialLead }: { initialLead: Lead }) {
           </div>
         </div>
         
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3 self-end sm:self-auto">
           {/* Status Dropdown */}
           <div className="bg-slate-100 p-1 rounded-xl flex items-center">
             <select 
