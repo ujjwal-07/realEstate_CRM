@@ -16,6 +16,8 @@ export default function LeadDetail({ initialLead }: { initialLead: Lead }) {
   // States for Lead Info Edit Mode
   const [isEditingInfo, setIsEditingInfo] = useState(false);
   const [editForm, setEditForm] = useState({ ...initialLead });
+  // Separate string state so the budget input can be freely cleared/typed
+  const [budgetInput, setBudgetInput] = useState(String(initialLead.budget));
 
   // States for Notes CRUD
   const [newNote, setNewNote] = useState("");
@@ -119,7 +121,14 @@ export default function LeadDetail({ initialLead }: { initialLead: Lead }) {
               </button>
             </div>
           ) : (
-            <button onClick={() => setIsEditingInfo(true)} className="p-2 text-slate-400 hover:text-indigo-600 transition-colors">
+            <button
+              onClick={() => {
+                setEditForm({ ...lead });
+                setBudgetInput(String(lead.budget));
+                setIsEditingInfo(true);
+              }}
+              className="p-2 text-slate-400 hover:text-indigo-600 transition-colors"
+            >
               <Edit3 size={20} />
             </button>
           )}
@@ -158,7 +167,19 @@ export default function LeadDetail({ initialLead }: { initialLead: Lead }) {
               <div className="space-y-1">
                 <p className="text-[10px] font-bold text-slate-300">BUDGET</p>
                 {isEditingInfo ? (
-                  <input type="number" className="w-full bg-slate-50 p-2 rounded-lg text-sm font-bold border-none" value={editForm.budget} onChange={(e)=>setEditForm({...editForm, budget:Number(e.target.value)})} />
+                  <input
+                    type="text"
+                    inputMode="numeric"
+                    className="w-full bg-slate-50 p-2 rounded-lg text-sm font-bold border-none outline-none focus:ring-2 focus:ring-indigo-400"
+                    value={budgetInput}
+                    onChange={(e) => {
+                      // Allow only digits
+                      const raw = e.target.value.replace(/[^0-9]/g, "");
+                      setBudgetInput(raw);
+                      setEditForm({ ...editForm, budget: raw === "" ? 0 : Number(raw) });
+                    }}
+                    placeholder="Enter budget"
+                  />
                 ) : (
                   <p className="text-xl font-black text-slate-900 tracking-tight">₹{lead.budget.toLocaleString('en-IN')}</p>
                 )}

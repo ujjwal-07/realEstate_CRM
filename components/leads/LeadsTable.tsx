@@ -47,7 +47,7 @@ export default function LeadsTable({ initialLeads }: { initialLeads: Lead[] }) {
     <div className="space-y-6">
       {/* Search & Filter Bar */}
       <div className="bg-white/70 backdrop-blur-md p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-wrap gap-4 items-center justify-between">
-        <div className="relative flex-1 min-w-[300px]">
+        <div className="relative flex-1 min-w-0">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
           <input
             type="text"
@@ -114,8 +114,8 @@ export default function LeadsTable({ initialLeads }: { initialLeads: Lead[] }) {
                     </Link>
                   </td>
                   <td className="px-6 py-5">
-                    <div className="flex items-center gap-1 text-slate-900 font-semibold text-sm">
-                      <IndianRupee size={14} className="text-slate-400" /> {lead.budget.toLocaleString('en-IN')}
+                    <div className="flex items-center gap-1 text-slate-900 font-semibold text-sm whitespace-nowrap">
+                      <IndianRupee size={14} className="text-slate-400 shrink-0" /> {lead.budget.toLocaleString('en-IN')}
                     </div>
                     <div className="flex items-center gap-1 text-slate-500 text-xs mt-1">
                       <MapPin size={12} /> {lead.location} • {lead.propertyType}
